@@ -1,0 +1,33 @@
+.container {
+    height: 900px;
+    background-color: #ccc;
+    
+}
+
+.contents-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.loading-screen {
+    background-color: black;
+    width: 1200px;
+    height: 800px;
+    position: absolute;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.util-container {
+}
+
+.util-container > button {
+    padding: 10px;
+    margin-right: 10px;
+}
