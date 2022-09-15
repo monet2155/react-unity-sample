@@ -5,10 +5,10 @@ import './App.css'
 function App() {
   
   const {unityProvider, isLoaded, sendMessage} = useUnityContext({
-    loaderUrl: "Build/build_ver0.2.loader.js",
-    dataUrl: "Build/build_ver0.2.data",
-    frameworkUrl: "Build/build_ver0.2.framework.js",
-    codeUrl: "Build/build_ver0.2.wasm",
+    loaderUrl: "Build/build_ver0.3.loader.js",
+    dataUrl: "Build/build_ver0.3.data",
+    frameworkUrl: "Build/build_ver0.3.framework.js",
+    codeUrl: "Build/build_ver0.3.wasm",
   })
 
   const [hideSplash, setHideSplash] = useState(true);
