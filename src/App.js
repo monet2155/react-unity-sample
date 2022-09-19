@@ -1,20 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { Unity, useUnityContext } from 'react-unity-webgl';
+import { io } from 'socket.io-client';
 import './App.css'
 
 function App() {
   
   const {unityProvider, isLoaded, sendMessage} = useUnityContext({
-    loaderUrl: "Build/build_ver0.3.loader.js",
-    dataUrl: "Build/build_ver0.3.data",
-    frameworkUrl: "Build/build_ver0.3.framework.js",
-    codeUrl: "Build/build_ver0.3.wasm",
+    loaderUrl: "Build/build_ver0.4.loader.js",
+    dataUrl: "Build/build_ver0.4.data",
+    frameworkUrl: "Build/build_ver0.4.framework.js",
+    codeUrl: "Build/build_ver0.4.wasm",
   })
 
   const [hideSplash, setHideSplash] = useState(true);
 
   const [customX, setCustomX] = useState(0)
   const [customZ, setCustomZ] = useState(0);
+
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    const socket = io("ws://localhost:3000/data");
+
+    socket.on("connect", () => {
+      setLogs([...logs, "socket connect"])
+    })
+    socket.on("disconnect", () => {
+      setLogs([...logs, "socket disconnect"])
+    })
+    socket.on("startRedis", (data) => {
+      setLogs([...logs, `startRedis : ${JSON.stringify(data)}`])
+    })
+    socket.on("redisToClient", (data) => {
+      setLogs([...logs, `redisToClient : ${JSON.stringify(data)}`])
+    })
+  }, []);
 
   useEffect(() => {
     if(isLoaded) {
@@ -51,6 +71,10 @@ function App() {
             <label>y</label>
             <input type={'number'} value={customZ} onChange={(e) => setCustomZ(e.target.value)}/>
             <button onClick={() => handleRobotPosition(customX, customZ)}>move</button>
+          </div>
+          <h1>Log</h1>
+          <div style={{maxHeight: 300, backgroundColor: 'white', overflowY: 'auto'}}>
+            {logs.map((val) => <div>{val}</div>)}
           </div>
         </div>
       </div>
