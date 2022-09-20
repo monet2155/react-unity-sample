@@ -6,10 +6,10 @@ import './App.css'
 function App() {
   
   const {unityProvider, isLoaded, sendMessage} = useUnityContext({
-    loaderUrl: "Build/build_ver0.4.loader.js",
-    dataUrl: "Build/build_ver0.4.data",
-    frameworkUrl: "Build/build_ver0.4.framework.js",
-    codeUrl: "Build/build_ver0.4.wasm",
+    loaderUrl: "Build/build_ver0.5.loader.js",
+    dataUrl: "Build/build_ver0.5.data",
+    frameworkUrl: "Build/build_ver0.5.framework.js",
+    codeUrl: "Build/build_ver0.5.wasm",
   })
 
   const [hideSplash, setHideSplash] = useState(true);
@@ -19,22 +19,22 @@ function App() {
 
   const [logs, setLogs] = useState([]);
 
-  useEffect(() => {
-    const socket = io("ws://localhost:3000/data");
+  // useEffect(() => {
+    // const socket = io("ws://localhost:3000/data");
 
-    socket.on("connect", () => {
-      setLogs([...logs, "socket connect"])
-    })
-    socket.on("disconnect", () => {
-      setLogs([...logs, "socket disconnect"])
-    })
-    socket.on("startRedis", (data) => {
-      setLogs([...logs, `startRedis : ${JSON.stringify(data)}`])
-    })
-    socket.on("redisToClient", (data) => {
-      setLogs([...logs, `redisToClient : ${JSON.stringify(data)}`])
-    })
-  }, []);
+    // socket.on("connect", () => {
+    //   setLogs([...logs, "socket connect"])
+    // })
+    // socket.on("disconnect", () => {
+    //   setLogs([...logs, "socket disconnect"])
+    // })
+    // socket.on("startRedis", (data) => {
+    //   setLogs([...logs, `startRedis : ${JSON.stringify(data)}`])
+    // })
+    // socket.on("redisToClient", (data) => {
+    //   setLogs([...logs, `redisToClient : ${JSON.stringify(data)}`])
+    // })
+  // }, []);
 
   useEffect(() => {
     if(isLoaded) {
